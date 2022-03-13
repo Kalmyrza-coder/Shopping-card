@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react'
+import Cart from './components/Cart';
+import Products from './components/Products';
 import './App.css';
+import axiosInstance from './helpers/Axios';
 
 function App() {
+  const [allProducts, setAllProducts] = useState([])
+
+  useEffect(() => {
+    callApi()
+  }, [])
+
+  const callApi = async () => {
+    const url = 'products/'
+    const req = await axiosInstance.get(url)
+    setAllProducts(req.data)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <>
+    <Products data={allProducts}/>
+    <Cart/>
+  </>
+  )
 }
 
 export default App;
