@@ -3,9 +3,11 @@ import Cart from './components/Cart';
 import Products from './components/Products';
 import './App.css';
 import axiosInstance from './helpers/Axios';
+import { Grid } from "@mui/material"
 
 function App() {
   const [allProducts, setAllProducts] = useState([])
+  const [order, setOrder] = useState([])
 
   useEffect(() => {
     callApi()
@@ -18,10 +20,17 @@ function App() {
   }
 
   return (
-  <>
-    <Products data={allProducts}/>
-    <Cart/>
-  </>
+  <div className='App'>
+    <Grid container>
+        <Grid item xs={8}>
+          <Products data={allProducts} passToCart={order}/> 
+        </Grid>
+        <Grid item xs={2}>
+          <Cart cart={order}/>
+        </Grid>
+    </Grid>
+    
+  </div>
   )
 }
 

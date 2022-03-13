@@ -15,9 +15,10 @@ function Product({data}) {
     return(
         <><Card sx={{
             maxWidth: 345,
-            mb: 10
+            mb: 5
         }}>
             <CardMedia 
+            height='140'
             component="img"
             image={image}
             alt="green iguana"
@@ -28,13 +29,21 @@ function Product({data}) {
             <Typography variant='body2' color="text.secondary">
                 {description}
             </Typography>
-            <Typography m={2} variant='body1' color="text">
+            <Typography m={2} variant='h2' color="text">
                 {price}
             </Typography>
             <Grid container spacing={2}>
                 <Grid item xs={3}><Button variant="contained" onClick={() => setQuantity(prev => prev + 1)}>Add one</Button></Grid>
+
                 <Grid item xs={3}><TextField disabled value={quantity}></TextField></Grid>
+
                 <Grid item xs={3}><Button variant="contained" onClick={() => setQuantity(prev => prev - 1)}>Remove one</Button></Grid>
+
+                <Grid item xs={3}>
+                    <Button fullWidth onClick={() => console.log('doll')}>
+                        order
+                    </Button>
+                </Grid>
             </Grid>
         </Card>
         </>
