@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react';
+import { GeneralContext } from '../context/Context';
 import { useEffect } from 'react'
 import Card from '@mui/material/Card'
 import { CardActions } from '@mui/material'
@@ -12,6 +13,7 @@ import { TextField } from '@mui/material'
 function Product({data}) {
     const {image,title,description, price} = data
     const [quantity, setQuantity] = useState(10)
+    const {setToCart} = useContext(GeneralContext)
     return(
         <><Card sx={{
             maxWidth: 345,
@@ -40,7 +42,7 @@ function Product({data}) {
                 <Grid item xs={3}><Button variant="contained" onClick={() => setQuantity(prev => prev - 1)}>Remove one</Button></Grid>
 
                 <Grid item xs={3}>
-                    <Button fullWidth onClick={() => console.log('doll')}>
+                    <Button fullWidth onClick={() => setToCart(prev => [...prev,{title:title, price:price, quantity:quantity}])}>
                         order
                     </Button>
                 </Grid>
